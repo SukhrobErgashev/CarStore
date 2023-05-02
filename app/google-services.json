@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "976949348643",
+    "project_id": "carstore-uz",
+    "storage_bucket": "carstore-uz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976949348643:android:ac7a0c3dca3f67bf162496",
+        "android_client_info": {
+          "package_name": "dev.sukhrob.carstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976949348643-geuur5gluln2sqq3m2fudnoi747m2i29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdYGGVjBOcWKcSYgqAwyv5L73cAb-ajYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976949348643-geuur5gluln2sqq3m2fudnoi747m2i29.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

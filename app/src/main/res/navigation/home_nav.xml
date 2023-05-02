@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav"
+    app:startDestination="@id/carListScreen"
+    tools:layout="@layout/screen_favorites">
+
+    <fragment
+        android:id="@+id/carListScreen"
+        android:name="dev.sukhrob.carstore.presentation.ui.main.car_list.CarListScreen"
+        android:label="screen_card_list"
+        tools:layout="@layout/screen_card_list">
+        <action
+            android:id="@+id/action_carListScreen_to_placeOrderScreen"
+            app:destination="@id/placeOrderScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesScreen"
+        android:name="dev.sukhrob.carstore.presentation.ui.main.favorites.FavoritesScreen"
+        android:label="FavoritesScreen"
+        tools:layout="@layout/screen_favorites" />
+    <fragment
+        android:id="@+id/ordersScreen"
+        android:name="dev.sukhrob.carstore.presentation.ui.main.orders.OrdersScreen"
+        android:label="OrdersScreen"
+        tools:layout="@layout/screen_orders" />
+    <fragment
+        android:id="@+id/profileScreen"
+        android:name="dev.sukhrob.carstore.presentation.ui.main.profile.ProfileScreen"
+        android:label="ProfileScreen"
+        tools:layout="@layout/screen_profile" />
+    <fragment
+        android:id="@+id/placeOrderScreen"
+        android:name="dev.sukhrob.carstore.presentation.ui.main.car_list.place_order.PlaceOrderScreen"
+        android:label="PlaceOrderScreen"
+        tools:layout="@layout/screen_place_order">
+        <action
+            android:id="@+id/action_placeOrderScreen_to_calculatePriceScreen"
+            app:destination="@id/calculatePriceScreen" />
+        <argument
+            android:name="carId"
+            app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerInfoScreen"
+        android:name="dev.sukhrob.carstore.presentation.ui.main.car_list.customer_info.CustomerInfoScreen"
+        android:label="CustomerInfoScreen"
+        tools:layout="@layout/screen_customer_info">
+        <argument
+            android:name="order"
+            app:argType="dev.sukhrob.carstore.domain.model.Order" />
+        <action
+            android:id="@+id/action_customerInfoScreen_to_carListScreen"
+            app:destination="@id/carListScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculatePriceScreen"
+        android:name="dev.sukhrob.carstore.presentation.ui.main.car_list.calculate_price.CalculatePriceScreen"
+        android:label="CalculatePriceScreen"
+        tools:layout="@layout/screen_calculate_price">
+        <action
+            android:id="@+id/action_calculatePriceScreen_to_customerInfoScreen"
+            app:destination="@id/customerInfoScreen" />
+        <argument
+            android:name="order"
+            app:argType="dev.sukhrob.carstore.domain.model.Order" />
+        <argument
+            android:name="price"
+            app:argType="long" />
+    </fragment>
+</navigation>
