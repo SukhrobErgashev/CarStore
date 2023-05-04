@@ -13,6 +13,7 @@ data class Order(
     var customerFullName: String? = null,
     var customerPhoneNumber: String? = null,
     var carId: String? = null,
+    var carModel: String? = null,
     var color: String? = null,
     var engineType: String? = null,
     var remoteController: Boolean? = null,
@@ -21,7 +22,8 @@ data class Order(
     var tinting: Boolean? = null,
     var videoRecorder: Boolean? = null,
     var wheelDisk: Boolean? = null,
-    var purchasedPrice: Long? = null
+    var primaryPrice: Long? = null,
+    var totalPrice: Long? = null
 ): Parcelable {
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -35,7 +37,7 @@ data class Order(
             Constants.tinting to tinting,
             Constants.videoRecorder to videoRecorder,
             Constants.wheelDisk to wheelDisk,
-            Constants.purchasedPrice to purchasedPrice
+            Constants.purchasedPrice to totalPrice
         )
     }
 }

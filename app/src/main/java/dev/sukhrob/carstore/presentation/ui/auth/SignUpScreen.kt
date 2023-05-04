@@ -36,6 +36,7 @@ class SignUpScreen : Fragment(R.layout.screen_sign_up) {
         firestore = Firebase.firestore
 
         binding.btnSignUp.setOnClickListener {
+            binding.progress.visibility = View.VISIBLE
             auth.createUserWithEmailAndPassword(
                 binding.editTextEmail.text.toString().trim(),
                 binding.editTextPassword.text.toString().trim()
@@ -51,12 +52,13 @@ class SignUpScreen : Fragment(R.layout.screen_sign_up) {
                             )
                         ).addOnCompleteListener {
                             if (it.isSuccessful) {
+                                binding.progress.visibility = View.GONE
                                 lifecycleScope.launch {
                                     uiSource.setJustInstalled(false)
                                 }
                                 findNavController().navigate(SignUpScreenDirections.actionSignUpScreenToSignInScreen())
                             } else {
-
+                                binding.progress.visibility = View.GONE
                             }
                         }
                     } else {

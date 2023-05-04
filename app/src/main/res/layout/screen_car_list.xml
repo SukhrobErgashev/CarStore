@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.main.orders.OrdersScreen">
+    tools:context=".presentation.ui.main.car_list.CarListScreen">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/toolbar"
@@ -19,22 +19,32 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="@string/orders_list"
+            android:text="@string/car_list"
             android:textColor="@color/black"
             android:textSize="14dp"
             android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_orders_list"
+        android:id="@+id/rv_car_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_order_list"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyle"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,16 +8,13 @@ import android.widget.SeekBar
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dev.sukhrob.carstore.R
 import dev.sukhrob.carstore.databinding.ScreenCalculatePriceBinding
 import dev.sukhrob.carstore.presentation.ui.main.MainVM
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class CalculatePriceScreen : Fragment(R.layout.screen_calculate_price) {
 
@@ -28,6 +25,8 @@ class CalculatePriceScreen : Fragment(R.layout.screen_calculate_price) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.textBasePrice.text = navArgs.order.totalPrice.toString()
 
         observePayByCash()
         observeTotalPrice()
@@ -43,11 +42,20 @@ class CalculatePriceScreen : Fragment(R.layout.screen_calculate_price) {
         }
 
         binding.btnOrder.setOnClickListener {
-            val order = navArgs.order.apply {
-                this.purchasedPrice = viewModel.totalPrice.value
-            }
-            mainViewModel.insertOrder(order)
+//            val order = navArgs.order.apply {
+//                this.totalPrice = viewModel.totalPrice.value
+//            }
+//            mainViewModel.insertOrder(order)
+            gotoCustomerInfoScreen()
         }
+    }
+
+    private fun gotoCustomerInfoScreen() {
+        findNavController().navigate(
+            CalculatePriceScreenDirections.actionCalculatePriceScreenToCustomerInfoScreen(
+                navArgs.order.copy(totalPrice = viewModel.totalPrice.value)
+            )
+        )
     }
 
     private fun observeTotalPrice() {
@@ -62,7 +70,7 @@ class CalculatePriceScreen : Fragment(R.layout.screen_calculate_price) {
         lifecycleScope.launchWhenStarted {
             viewModel.discount.collect {
                 binding.textDiscountCounter.text = it.toString()
-                viewModel.calculateTotalPrice(navArgs.price)
+                viewModel.calculateTotalPrice(navArgs.order.totalPrice!!)
             }
         }
     }
@@ -98,7 +106,7 @@ class CalculatePriceScreen : Fragment(R.layout.screen_calculate_price) {
                 binding.seekbarPeriod.max = 60
                 viewModel.setLoanDuration(progress)
                 binding.textPeriod.text = progress.toString()
-                viewModel.calculateTotalPrice(navArgs.price)
+                viewModel.calculateTotalPrice(navArgs.order.totalPrice!!)
 
             }
 

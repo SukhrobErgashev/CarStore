@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CalculatePriceVM @Inject constructor(): ViewModel() {
+class CalculatePriceVM @Inject constructor() : ViewModel() {
 
     private var _payByCash = MutableStateFlow(true)
     val payByCash: StateFlow<Boolean> get() = _payByCash
@@ -21,7 +21,7 @@ class CalculatePriceVM @Inject constructor(): ViewModel() {
     private var _loanDuration = MutableStateFlow(6)
     val loanDuration: StateFlow<Int> get() = _loanDuration
 
-    private var _discount = MutableStateFlow(1)
+    private var _discount = MutableStateFlow(0)
     val discount: StateFlow<Int> get() = _discount
 
     private var counter = MutableStateFlow(1)

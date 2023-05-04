@@ -35,19 +35,20 @@ class SignInScreen : Fragment(R.layout.screen_sign_in) {
         }
 
         binding.btnEnter.setOnClickListener {
+            binding.progress.visibility = View.VISIBLE
             auth.signInWithEmailAndPassword(
                 binding.editTextEmail.text.toString().trim(),
                 binding.editTextPassword.text.toString().trim()
             )
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
-                        val manager = auth.currentUser
+                        binding.progress.visibility = View.GONE
                         lifecycleScope.launch {
                             uiSource.setJustInstalled(false)
                         }
                         gotoMainScreen()
                     } else {
-                        // fuck
+                        binding.progress.visibility = View.GONE
                     }
                 }
         }

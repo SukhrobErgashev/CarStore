@@ -8,15 +8,22 @@ import dev.sukhrob.carstore.R
 import dev.sukhrob.carstore.databinding.ItemCarListBinding
 import dev.sukhrob.carstore.domain.model.Car
 
-class CarListAdapter(private val list: List<Car>) : RecyclerView.Adapter<CarListAdapter.CarListVH>() {
+class CarListAdapter(private val list: List<Car>) :
+    RecyclerView.Adapter<CarListAdapter.CarListVH>() {
 
     var listener: ((carId: String, price: Long) -> Unit)? = null
 
-    inner class CarListVH(private val binding: ItemCarListBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class CarListVH(private val binding: ItemCarListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
-                listener?.let { it1 -> it1(list[bindingAdapterPosition].carId!!, list[bindingAdapterPosition].price!!) }
+                listener?.let { it1 ->
+                    it1(
+                        list[bindingAdapterPosition].carId!!,
+                        list[bindingAdapterPosition].price!!
+                    )
+                }
             }
         }
 
@@ -24,7 +31,6 @@ class CarListAdapter(private val list: List<Car>) : RecyclerView.Adapter<CarList
             with(binding) {
                 imageCar.load(list[bindingAdapterPosition].carImage) {
                     crossfade(true)
-                    placeholder(R.drawable.ic_cars)
                 }
                 textModel.text = list[bindingAdapterPosition].model
                 textOriginCountry.text = list[bindingAdapterPosition].originCountry

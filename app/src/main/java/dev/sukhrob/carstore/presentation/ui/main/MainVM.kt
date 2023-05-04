@@ -7,6 +7,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dev.sukhrob.carstore.domain.model.Car
+import dev.sukhrob.carstore.domain.model.Manager
 import dev.sukhrob.carstore.domain.model.Order
 import dev.sukhrob.carstore.utils.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,13 +31,24 @@ class MainVM : ViewModel() {
     private var _carById = MutableStateFlow(Order())
     val carById: StateFlow<Order> get() = _carById
 
+    private var _managerInfo = MutableStateFlow(Manager())
+    val managerInfo: StateFlow<Manager> get() = _managerInfo
+
     init {
         getCarList()
     }
 
-    fun getOrders(managerUid: String) {
+    fun gerManagerInfo() {
+        db.collection("managers").document(auth.uid!!).get().addOnSuccessListener { result ->
+            _managerInfo.value = result.toObject(Manager::class.java) ?: Manager()
+        }.addOnFailureListener { exception ->
+            Log.d("something", "Error getting manager info")
+        }
+    }
+
+    fun getOrders() {
         val orders = ArrayList<Order>()
-        db.collection("managers").document(managerUid).collection("orders")
+        db.collection("managers").document(auth.uid!!).collection("orders")
             .get().addOnSuccessListener { result ->
                 for (document in result) {
                     val order = document.toObject(Order::class.java)

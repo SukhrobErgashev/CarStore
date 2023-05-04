@@ -10,7 +10,7 @@
         android:id="@+id/carListScreen"
         android:name="dev.sukhrob.carstore.presentation.ui.main.car_list.CarListScreen"
         android:label="screen_card_list"
-        tools:layout="@layout/screen_card_list">
+        tools:layout="@layout/screen_car_list">
         <action
             android:id="@+id/action_carListScreen_to_placeOrderScreen"
             app:destination="@id/placeOrderScreen" />
@@ -55,7 +55,9 @@
             app:argType="dev.sukhrob.carstore.domain.model.Order" />
         <action
             android:id="@+id/action_customerInfoScreen_to_carListScreen"
-            app:destination="@id/carListScreen" />
+            app:destination="@id/carListScreen"
+            app:popUpTo="@id/carListScreen"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/calculatePriceScreen"
@@ -68,8 +70,5 @@
         <argument
             android:name="order"
             app:argType="dev.sukhrob.carstore.domain.model.Order" />
-        <argument
-            android:name="price"
-            app:argType="long" />
     </fragment>
 </navigation>
